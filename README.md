@@ -1,4 +1,5 @@
 # mac_environment_setup
+## For Ruby and Javascript
 
 ### Prerequisites
 
@@ -60,7 +61,7 @@ recommend installing:
 * `JS JSX Snippets` (snippets for javascript and react)
 * `Material Icon Theme` (icons to easily distinguish file and folder types)
 
-### Step 1 - XCode command line tools
+### Step 2 - XCode command line tools
 
 Open up iterm2 and run the following command:
 ```sh
@@ -80,7 +81,7 @@ install to continue. You may need to provide your computer's password.
 >
 > If you receive this error, you are good to continue!
 
-### Step 2 - Homebrew
+### Step 3 - Homebrew
 
 Homebrew is a package manager for the Mac. It allows us to install a number
 of things we will need. To install Homebrew, run the following:
@@ -95,7 +96,12 @@ of things we will need. To install Homebrew, run the following:
 You can verify that Homebrew is successfully installed by running `brew help`. If
 your terminal outputs a list of `brew` commands, you're all set.
 
-### Step 3 - GMP and GnuPG Packages
+> **Note:** if you have permissions errors whenever you're trying to install
+> anything with homebrew, try running the following command:
+> `sudo chown -R $(whoami):admin /usr/local/* && sudo chmod -R g+rwx /usr/local/*`
+> It *should* fix the issue (at least it did for me).
+
+### Step 4 - GMP and GnuPG Packages
 
 Before continuing further, we need to install some libraries that other tools
 rely on, [GMP][] and [GnuPG][]:
@@ -112,7 +118,7 @@ brew install gnupg
 > brew link gnupg
 > ```
 
-### Step 3 - Git
+### Step 5 - Git
 
 We use Homebrew to install git too. Run the following command:
 ```sh
@@ -135,7 +141,7 @@ This accepts the default file location. It will also prompt you to create a
 passphrase. It's up to you whether you want one or not. Next, you want to 
 [add the ssh key to your github](https://docs.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account)
 
-### Step 4 - RVM & Ruby
+### Step 6 - RVM & Ruby
 
 RVM is a tool that lets you run different versions of Ruby on your computer.
 If one project you're working on works with Ruby version 2.3.3 and another needs
@@ -165,8 +171,14 @@ Once the encryption keys are downloaded, use the following command to download R
 curl -sSL https://get.rvm.io | bash
 ```
 
-When RVM is installed, close and reopen your terminal to make sure RVM is fully
-loaded. Next, we will install the Ruby version we'll be using and set it as the default:
+When RVM is installed, open your bash profile in VSCode by running `code ~/.bash_profile`. 
+Paste the following on the last line:
+```sh
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+```
+Save the file and run `source ~/.bash_profile`.
+
+Next, we will install the Ruby version we'll be using and set it as the default:
 
 ```sh
 rvm install 2.6.1
@@ -178,7 +190,7 @@ listed, indicating that `2.6.1` is installed and set as the default version for
 Ruby. You can also run `ruby -v`, which should show that Ruby `2.6.1` is the
 current version of Ruby being used.
 
-### Step 5 - Gems
+### Step 7 - Gems
 
 Ruby makes use of packages called 'gems'. There are a few that I recommend installing now.
 * First, let's update our system gems by running `gem update --system`
@@ -196,7 +208,7 @@ Ruby makes use of packages called 'gems'. There are a few that I recommend insta
 > easily install all of these gems for you. All you need to do after running 
 > `gem update --system`is run `initialgems` and you'll be set.
 
-### Step 6 - Database stuff
+### Step 8 - Database stuff
 
 If you're gonna work with databases, I suggest running the following commands.
 
@@ -211,7 +223,8 @@ brew services start postgresql
 gem install pg
 ```
 
-### Step 7 - NVM & Node
+### Step 9 - NVM & Node
+
 To manage different versions of Node installed on our computer, we can use JavaScript's 
 equivalent of RVM - NVM. Let's get your Node Version Manager installed. Run the following 
 in your terminal:
@@ -219,3 +232,25 @@ in your terminal:
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 ```
+
+We'll need to edit our `.bash_profile` again by adding the following code right **above**
+the rvm line we added before:
+```sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+Save the file and run `source ~/.bash_profile` to load nvm. The next step is to install
+node by running:
+```sh
+nvm install node
+nvm use node
+```
+You can ensure node has been installed by running `node -v`. It should return a version 
+number like `v15.6.0`.
+
+### Step 10 - Development folder
+
+It's good practice to create a folder to store all of your code. You can do this in the terminal
+by running `mkdir Development`. I like to then organize my code into subfolders, but you can
+organize it however you choose.
