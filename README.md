@@ -13,7 +13,7 @@ most comfortable with.
 > Preferences, click on `Security & Privacy` -> `Full Disk Access` and make sure that the
 > checkbox for iTerm2 is checked.
 
-### Step 0 - Change Default Shell
+### Step 0 - Set Up Default Shell
 
 Right now the default Terminal shell for iTerm2 is zsh, but I'm more familiar with bash so to 
 make sure everything is consistent and we don't run into any unexpected errors, we want to change 
@@ -27,6 +27,38 @@ output `/bin/bash`.
 
 > **Note:** if at any point you want to switch to using zsh, you can run the same command, but instead 
 > of `/bin/bash` you'd type `/bin/zsh`.
+
+Next, you'll want to make sure you have a bash_profile in your home directory. If you want to 
+use the one I've created, just copy the contents of `.bash_profile` (in this repo) and run the 
+following commands:
+```sh
+touch .bash_profile
+open .bash_profile
+```
+
+This should open a file in TextEdit. Paste the contents you copied from my profile into there and
+save with `Cmd`+`S`. Lastly, run `source ~/.bash_profile` in your terminal. A table showing a list
+of available commands should appear, but don't mess with any of those yet because some won't work until
+we've finished the installation process.
+
+### Step 1 - Set up VS Code & Bash Profile
+
+launch Visual Stuido Code and type `command(⌘) + shift(⇧) + p`, and your **Command Palette** 
+will open. In your **Command Palette**, type `>shell command`. Select "Shell Command: Install
+'code' command in PATH"
+
+![VS Code Add to Path](https://curriculum-content.s3.amazonaws.com/onboarding/vscode%20path.png)
+
+VS Code has a lot of extensions available to make your life easier as you code. Here are some that I
+recommend installing:
+* `ESLint` and/or `Prettier` (to format your code)
+* `Visual Studio Intellicode` (for some easy auto-completion)
+* `Path Intellisense` (for path completion)
+* `Auto Rename Tag` and `Auto Close Tag` (for html)
+* `Color Highlight` and/or `Color Picker` (for css)
+* `ruby-rubocop` (to format ruby code)
+* `JS JSX Snippets` (snippets for javascript and react)
+* `Material Icon Theme` (icons to easily distinguish file and folder types)
 
 ### Step 1 - XCode command line tools
 
@@ -104,6 +136,7 @@ passphrase. It's up to you whether you want one or not. Next, you want to
 [add the ssh key to your github](https://docs.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account)
 
 ### Step 4 - RVM & Ruby
+
 RVM is a tool that lets you run different versions of Ruby on your computer.
 If one project you're working on works with Ruby version 2.3.3 and another needs
 2.6.1, you can easily switch between the two versions when you switch between
@@ -146,6 +179,7 @@ Ruby. You can also run `ruby -v`, which should show that Ruby `2.6.1` is the
 current version of Ruby being used.
 
 ### Step 5 - Gems
+
 Ruby makes use of packages called 'gems'. There are a few that I recommend installing now.
 * First, let's update our system gems by running `gem update --system`
 * Install the Bundler gem with `gem install bundler`. This gem takes care of
@@ -158,3 +192,30 @@ Ruby makes use of packages called 'gems'. There are a few that I recommend insta
 * Some others worth looking into and installing are `rake`, `git`, `jasmine`, `netrc`, `oj`, 
   `crack`, and `faraday`
 
+> ***Note:*** If you are using my `.bash_profile`, I've included a function that will
+> easily install all of these gems for you. All you need to do after running 
+> `gem update --system`is run `initialgems` and you'll be set.
+
+### Step 6 - Database stuff
+
+If you're gonna work with databases, I suggest running the following commands.
+
+To install Sqlite:
+```sh
+brew install sqlite
+```
+To install Postgres:
+```sh
+brew install postgres
+brew services start postgresql
+gem install pg
+```
+
+### Step 7 - NVM & Node
+To manage different versions of Node installed on our computer, we can use JavaScript's 
+equivalent of RVM - NVM. Let's get your Node Version Manager installed. Run the following 
+in your terminal:
+
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```
