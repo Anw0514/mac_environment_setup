@@ -133,7 +133,7 @@
     helptable "COMMAND" "DESCRIPTION" items[@] descriptions[@]
   }
   # called in every loading of this file
-  helpbb
+  helpme
 
   # Used as a replacement of git clone
   function gcl () {
