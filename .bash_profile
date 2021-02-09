@@ -88,10 +88,10 @@
   }
 
   # Function that lists useful functions and aliases
-  function helpbb {
-    # USAGE: helpbb
+  function helpme {
+    # USAGE: helpme
     local items=(
-      "helpbb" 
+      "helpme" 
       "pwd"
       "home"
       "ls" 
@@ -141,10 +141,10 @@
     read -ra ADDR <<< "$1"
     IFS="."
     read -ra FILENAME <<< "${ADDR[1]}"
-    sudo git clone "$1" && cd "${FILENAME[0]}"
+    git clone "$1" && cd "${FILENAME[0]}"
     printf "\n \e[0;32m Successfuly cloned repo ${FILENAME[0]}\n\e[0m"
     printf "\nYou are now in: \e[0;33m $(pwd)\n"
-    printf "\n \e[0;36m Have fun coding bb! \e[0m ( ˘ ³˘)♡\n"
+    printf "\n \e[0;36m Have fun coding! \e[0m\n"
   }
 
   # Used as a replacement of git status
@@ -158,7 +158,7 @@
   function remove () {
     sudo rm -rf "$1"
     printf "\n Deleted folder \e[0;31m$1 \n\e[0m\n"
-    printf " ( ˘ ³˘)♡\n"
+    printf "============================="
     ls
   }
 
