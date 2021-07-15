@@ -141,7 +141,7 @@ This accepts the default file location. It will also prompt you to create a
 passphrase. It's up to you whether you want one or not. Next, you want to 
 [add the ssh key to your github](https://docs.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account)
 
-### Step 6 - RVM & Ruby
+### Step 6 - RVM & Ruby (If you're just learning JS, skip to step 9)
 
 RVM is a tool that lets you run different versions of Ruby on your computer.
 If one project you're working on works with Ruby version 2.3.3 and another needs
